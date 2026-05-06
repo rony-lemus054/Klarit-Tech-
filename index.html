@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klarit — AI Automation for IT Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1A1A1A;
+      --bg2: #222222;
+      --bg3: #1f1f1f;
+      --accent: #F97316;
+      --accent-dim: rgba(249,115,22,0.12);
+      --accent-glow: rgba(249,115,22,0.25);
+      --white: #FFFFFF;
+      --gray1: #E8E4DC;
+      --gray2: #94A3B8;
+      --gray3: #3a3a3a;
+      --border: rgba(255,255,255,0.07);
+      --max: 1080px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 40px;
+      background: rgba(26,26,26,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+      letter-spacing: 3px; color: var(--white); text-decoration: none;
+    }
+    .nav-logo svg { width: 34px; height: 34px; }
+    .nav-cta {
+      background: var(--accent); color: var(--white);
+      padding: 10px 22px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.3px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 140px 24px 100px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse at center, rgba(249,115,22,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-dim); border: 1px solid rgba(249,115,22,0.2);
+      color: var(--accent); border-radius: 100px;
+      padding: 6px 16px; font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+      margin-bottom: 32px;
+    }
+    .hero-tag span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: block; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(58px, 10vw, 100px);
+      font-weight: 800; letter-spacing: -2px; line-height: 1;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    h1 em { color: var(--accent); font-style: normal; }
+    .hero-sub {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(16px, 2.5vw, 22px);
+      font-weight: 600; letter-spacing: 2px;
+      color: var(--gray2); margin-bottom: 28px; text-transform: uppercase;
+    }
+    .hero-desc {
+      max-width: 560px; font-size: 17px; color: var(--gray1);
+      font-weight: 300; margin-bottom: 44px; line-height: 1.75;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent); color: var(--white);
+      padding: 16px 38px; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.3px;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 40px rgba(249,115,22,0.3);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 0 60px rgba(249,115,22,0.45); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 24px; }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 700; line-height: 1.15; letter-spacing: -1px;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .lead { font-size: 18px; color: var(--gray2); font-weight: 300; max-width: 600px; line-height: 1.75; }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .problem-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .problem-visual {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .pill {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 22px;
+      font-size: 15px; color: var(--gray1); font-weight: 300;
+    }
+    .pill-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+
+    /* ── SOLUTION ── */
+    .solution { background: var(--bg3); }
+    .solution-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px;
+    }
+    .card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px 32px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card:hover { border-color: rgba(249,115,22,0.35); transform: translateY(-4px); }
+    .card-num {
+      font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800;
+      color: rgba(249,115,22,0.18); line-height: 1; margin-bottom: 20px;
+    }
+    .card h3 {
+      font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700;
+      margin-bottom: 12px; color: var(--white);
+    }
+    .card p { font-size: 15px; color: var(--gray2); font-weight: 300; line-height: 1.7; }
+
+    /* ── BENEFITS ── */
+    .benefits { background: var(--bg); }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      margin-top: 56px;
+    }
+    .benefit {
+      padding: 48px 36px;
+      border-right: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .benefit:last-child { border-right: none; }
+    .benefit-val {
+      font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800;
+      color: var(--accent); line-height: 1; margin-bottom: 10px;
+    }
+    .benefit h3 {
+      font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700;
+      margin-bottom: 10px; color: var(--white);
+    }
+    .benefit p { font-size: 14px; color: var(--gray2); font-weight: 300; line-height: 1.65; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: var(--bg3); text-align: center;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .final-cta h2 { margin-bottom: 14px; }
+    .final-cta .lead { margin: 0 auto 40px; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--bg); }
+    .contact-wrap {
+      max-width: 580px; margin: 0 auto; padding-top: 12px;
+    }
+    .form-group { margin-bottom: 22px; }
+    label {
+      display: block; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.5px; color: var(--gray2); margin-bottom: 8px;
+    }
+    input, textarea {
+      width: 100%;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px;
+      color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input::placeholder, textarea::placeholder { color: #4a4a4a; }
+    input:focus, textarea:focus {
+      border-color: rgba(249,115,22,0.5);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.08);
+    }
+    textarea { resize: vertical; min-height: 130px; }
+    .btn-submit {
+      width: 100%; background: var(--accent); color: var(--white);
+      border: none; border-radius: 10px; padding: 16px;
+      font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
+      cursor: pointer; letter-spacing: 0.3px;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(249,115,22,0.25);
+    }
+    .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 0 50px rgba(249,115,22,0.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      color: var(--gray2); font-size: 13px;
+    }
+    footer strong { color: var(--gray1); font-weight: 500; }
+
+    /* ── DIVIDER ── */
+    .divider { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 32px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 18px 20px; }
+      .problem-inner { grid-template-columns: 1fr; gap: 40px; }
+      .solution-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit { border-right: none; border-bottom: 1px solid var(--border); }
+      .benefit:last-child { border-bottom: none; }
+      section { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" rx="40" fill="#1A1A1A"/>
+        <line x1="72" y1="52" x2="72" y2="152" stroke="white" stroke-width="9" stroke-linecap="round"/>
+        <line x1="72" y1="102" x2="140" y2="52" stroke="white" stroke-width="9" stroke-linecap="round"/>
+        <line x1="72" y1="102" x2="140" y2="152" stroke="white" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="140" cy="52" r="9" fill="#F97316"/>
+      </svg>
+      KLARIT
+    </a>
+    <a href="#contact" class="nav-cta">Book a Demo</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag"><span></span> AI-Powered IT Automation</div>
+    <h1>Klar<em>it</em></h1>
+    <p class="hero-sub">AI Automation for IT Operations</p>
+    <p class="hero-desc">We help companies streamline operations and reduce workload by implementing intelligent AI agents that automate repetitive processes and enhance team productivity.</p>
+    <a href="#contact" class="btn-primary">Book a Free Demo</a>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="container">
+      <div class="problem-inner">
+        <div>
+          <p class="section-label">The Problem</p>
+          <div class="divider"></div>
+          <h2>IT teams are drowning in repetitive work</h2>
+          <p class="lead">Slow response times, mounting tickets, and rising operational costs are the reality for most IT departments today.</p>
+        </div>
+        <div class="problem-visual">
+          <div class="pill"><div class="pill-icon">🔁</div>Repetitive requests consume 60% of team time</div>
+          <div class="pill"><div class="pill-icon">⏱️</div>Response times keep growing, not shrinking</div>
+          <div class="pill"><div class="pill-icon">📈</div>Operational costs rise without added output</div>
+          <div class="pill"><div class="pill-icon">😓</div>Teams burn out managing manual processes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution">
+    <div class="container">
+      <p class="section-label">The Solution</p>
+      <div class="divider"></div>
+      <h2>AI agents built for your operations</h2>
+      <p class="lead">Klarit implements intelligent agents that integrate with your stack and work 24/7 — so your team doesn't have to.</p>
+      <div class="solution-grid">
+        <div class="card">
+          <div class="card-num">01</div>
+          <h3>Automate repetitive tasks</h3>
+          <p>AI agents handle recurring requests and processes automatically, freeing your team for high-impact work.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">02</div>
+          <h3>Integrate with your tools</h3>
+          <p>Klarit connects seamlessly with your existing workflows, platforms, and communication tools — no rip-and-replace.</p>
+        </div>
+        <div class="card">
+          <div class="card-num">03</div>
+          <h3>Learn and improve</h3>
+          <p>Our agents continuously learn from your data and team interactions, getting smarter and more accurate over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits">
+    <div class="container">
+      <p class="section-label">Results</p>
+      <div class="divider"></div>
+      <h2>Real impact, measurable results</h2>
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="benefit-val">−60%</div>
+          <h3>Ticket Volume</h3>
+          <p>Fewer manual requests reaching your team thanks to intelligent automation handling the routine.</p>
+        </div>
+        <div class="benefit">
+          <div class="benefit-val">3×</div>
+          <h3>Faster Response</h3>
+          <p>Resolve requests in minutes, not hours. AI agents work around the clock without delays.</p>
+        </div>
+        <div class="benefit">
+          <div class="benefit-val">−40%</div>
+          <h3>Operational Cost</h3>
+          <p>Significant cost reduction by automating what doesn't need a human touch — every single day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <p class="section-label">Get Started</p>
+      <div class="divider" style="margin: 0 auto 32px;"></div>
+      <h2>Ready to optimize your IT operations?</h2>
+      <p class="lead">Let's talk about how Klarit can reduce your team's workload starting this week.</p>
+      <a href="#contact" class="btn-primary">Schedule a Demo</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <div class="divider"></div>
+      <h2>Let's talk</h2>
+      <p class="lead" style="margin-bottom: 48px;">Fill out the form and we'll get back to you within 24 hours.</p>
+      <div class="contact-wrap">
+        <form method="POST" action="https://formspree.io/f/mwvybrvg">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us about your challenge *</label>
+            <textarea id="message" name="message" placeholder="Describe your current IT situation and what you'd like to improve..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Request →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>© 2025 Klarit Tech Solutions.</strong> All rights reserved. · klarittech.com
+  </footer>
+
+</body>
+</html>
